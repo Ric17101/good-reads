@@ -27,7 +27,7 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ userList ->
                     users.postValue(Resource.success(userList))
-                }, { throwable ->
+                }, { _ ->
                     users.postValue(Resource.error("Something Went Wrong", null))
                 })
         )
