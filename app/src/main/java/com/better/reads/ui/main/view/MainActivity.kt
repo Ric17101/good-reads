@@ -2,7 +2,6 @@ package com.better.reads.ui.main.view
 
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -26,14 +25,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
-        // val decorView: View = window.decorView
-        // val contentView = decorView.findViewById<View>(android.R.id.content) as ViewGroup
-        //binding = DataBindingUtil.inflate(layoutInflater, R.layout.activity_main, contentView, false)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        ///setContentView(binding.root)
-        // binding = ActivityMainBinding.inflate(layoutInflater)
-        //
+
         setupUI()
         setupViewModel()
         setupObserver()
@@ -64,7 +57,6 @@ class MainActivity : AppCompatActivity() {
                     binding.recyclerView.visibility = View.GONE
                 }
                 Status.ERROR -> {
-                    //Handle Error
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                 }

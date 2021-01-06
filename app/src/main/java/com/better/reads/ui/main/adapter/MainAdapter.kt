@@ -27,7 +27,7 @@ class MainAdapter(
                 Glide.with(imageViewAvatar.context)
                     .load(user.avatar)
                     .into(imageViewAvatar)
-                //binding?.executePendingBindings()
+                binding?.executePendingBindings()
             }
         }
     }
@@ -35,7 +35,6 @@ class MainAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding: ItemLayoutBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_layout, parent, false)
-        //val binding: ItemLayoutBinding = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DataViewHolder(binding)
     }
 
