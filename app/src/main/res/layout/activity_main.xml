@@ -14,6 +14,18 @@
             android:layout_height="match_parent"
             android:visibility="gone" />
 
+<com.google.android.material.button.MaterialButton
+        android:id="@+id/button"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="start"
+        app:cornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"

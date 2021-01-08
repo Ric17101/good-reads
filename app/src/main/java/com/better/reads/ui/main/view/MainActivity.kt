@@ -6,43 +6,65 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.better.reads.R
 import com.better.reads.data.api.ApiHelper
 import com.better.reads.data.api.ApiServiceImpl
 import com.better.reads.data.model.User
 import com.better.reads.databinding.ActivityMainBinding
 import com.better.reads.ui.base.ViewModelFactory
-import com.better.reads.ui.main.adapter.MainAdapter
+import com.better.reads.ui.main.adapter.GridAdapter
 import com.better.reads.ui.main.viewmodel.MainViewModel
+import com.better.reads.utils.SpannedGridLayoutManager
+import com.better.reads.utils.SpannedGridLayoutManager.GridSpanLookup
+import com.better.reads.utils.SpannedGridLayoutManager.SpanInfo
 import com.better.reads.utils.Status
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
-    private lateinit var adapter: MainAdapter
+    private lateinit var adapter: GridAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        setupUI()
+        //setupUI()
+        setupSpannedGridLayout()
         setupViewModel()
         setupObserver()
     }
 
-    private fun setupUI() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = MainAdapter(arrayListOf())
-        binding.recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                binding.recyclerView.context,
-                (binding.recyclerView.layoutManager as LinearLayoutManager).orientation
-            )
+    private fun setupSpannedGridLayout() {
+        val manager = SpannedGridLayoutManager(
+            object : GridSpanLookup {
+                override fun getSpanInfo(position: Int): SpanInfo {
+                    // Conditions for 2x2 items
+                    return if (position % 6 == 0 || position % 6 == 4) {
+                        SpanInfo(2, 2)
+                    } else {
+                        SpanInfo(1, 1)
+                    }
+                }
+            },
+            3,  // number of columns
+            1f // how big is default item
         )
+        binding.recyclerView.layoutManager = manager
+        adapter = GridAdapter(arrayListOf())
         binding.recyclerView.adapter = adapter
     }
+
+    // private fun setupUI() {
+    //     binding.recyclerView.layoutManager = LinearLayoutManager(this)
+    //     adapter = MainAdapter(arrayListOf())
+    //     binding.recyclerView.addItemDecoration(
+    //         DividerItemDecoration(
+    //             binding.recyclerView.context,
+    //             (binding.recyclerView.layoutManager as LinearLayoutManager).orientation
+    //         )
+    //     )
+    //     binding.recyclerView.adapter = adapter
+    // }
 
     private fun setupObserver() {
         mainViewModel.getUsers().observe(this, {

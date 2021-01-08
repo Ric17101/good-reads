@@ -23,6 +23,23 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        flavorDimensions 'yourAppName'
+
+        resValue "string", "host_name", "www.live_demo.com"
+        resValue "string", "app_scheme", "http"
+
+        productFlavors {
+            demo {
+                dimension 'yourAppName'
+                resValue "string", "host_name", "www.host_demo.com"
+            }
+
+            staging {
+                dimension 'yourAppName'
+                resValue "string", "host_name", "www.host_staging.com"
+            }
+        }
     }
 
     buildTypes {
