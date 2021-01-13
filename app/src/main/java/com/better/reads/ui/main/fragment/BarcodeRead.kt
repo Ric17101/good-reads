@@ -36,7 +36,7 @@ class BarcodeRead : Fragment() {
         btnBarcode = view.findViewById(R.id.button)
         textView = view.findViewById(R.id.txtContent)
         btnBarcode.setOnClickListener {
-            val intentIntegrator = IntentIntegrator(activity)
+            val intentIntegrator = IntentIntegrator.forSupportFragment(this)
             intentIntegrator.setBeepEnabled(false)
             intentIntegrator.setCameraId(0)
             intentIntegrator.setPrompt("SCAN")
