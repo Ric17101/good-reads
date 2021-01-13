@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.better.reads.data.model.User
-import com.better.reads.data.repository.MainRepository
+import com.better.reads.data.repository.GridRepository
 import com.better.reads.utils.Resource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
+class GridViewModel(private val gridRepository: GridRepository) : ViewModel() {
 
     private val users = MutableLiveData<Resource<List<User>>>()
     private val compositeDisposable = CompositeDisposable()
@@ -22,7 +22,7 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
     private fun fetchUsers() {
         users.postValue(Resource.loading(null))
         compositeDisposable.add(
-            mainRepository.getUsers()
+            gridRepository.getUsers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ userList ->

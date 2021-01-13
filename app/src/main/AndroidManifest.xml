@@ -2,7 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.better.reads">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.camera.autoFocus" />
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BetterReads">
-        <activity android:name=".ui.main.view.MainViewPagerActivity">
+        <activity android:name=".ui.main.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +25,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.main.view.MainActivity" />
+        <activity
+            android:name=".ui.main.view.MainViewPagerActivity"
+            android:label="Demo_ViewPager2" />
+        <activity android:name=".ui.main.view.BarCodeActivity" />
+        <activity android:name=".ui.main.view.GridListMVVMActivity" />
 
     </application>
 
