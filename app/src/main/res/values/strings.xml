@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Demo_ViewPager2</string>
+    <string name="info_unsaved_data">There is unsave data, Save data?</string>
 </resources>
